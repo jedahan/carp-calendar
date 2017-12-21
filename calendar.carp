@@ -1,0 +1,24 @@
+(project-set! "search-path" "/Users/micro/src/anima/")
+(load "anima.carp")
+
+(use-all IO String Array Anima)
+
+(defn get-size []
+  (let [number-of-months 12
+        longest-month 31
+        screen-size &(screensize)]
+    [(* 2 (first screen-size))
+     (* 2 (/ (* number-of-months (last screen-size)) longest-month))]))
+
+(defn setup [app rend]
+  (do
+    (framerate 30)
+    (println &(Array.str &(get-size)))))
+
+(defn draw [app rend]
+  (do
+    (color app rend 0 0 255)))
+
+(defsketch "calendar" (first &(get-size)) (last &(get-size))
+  setup
+  draw)
